@@ -1,2 +1,4 @@
-package com.example.pigeonnier.bll;public interface PigeonManager {
+package com.example.pigeonnier.bll;
+
+public interface PigeonManager {
 }
