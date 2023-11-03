@@ -1,40 +1,42 @@
 /*
-import org.springframework.beans.factory.annotation.Autowired;
+package com.example.pigeonnier.security;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig {
 
-    // Configuration pour autoriser un accès sans restriction à toutes les URL
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login") // Page de connexion personnalisée (si nécessaire)
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .permitAll();
-    }
 
-    // Configuration pour un PasswordEncoder (dans ce cas, NoOpPasswordEncoder pour un exemple)
+    */
+/**
+     * Restriction des URLs selon la connexion utilisateur et leurs rôles
+     *//*
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(auth -> {
+            auth.requestMatchers("*.css").permitAll()
 
-    // Autres configurations de sécurité, service utilisateur, etc.
+					.requestMatchers("/").permitAll()
+                    .requestMatchers("/").hasAnyAuthority("ADMIN")
+                    .requestMatchers(HttpMethod.GET,"/*").hasAnyAuthority("USER")
+                    .anyRequest().authenticated();
+        });
+
+        http.httpBasic(Customizer.withDefaults());
+
+        http.formLogin(
+                        (form) -> form.loginPage("/login").permitAll())
+                .logout((logout) -> logout.permitAll());
+
+
+        return http.build();
+    }
 }*/

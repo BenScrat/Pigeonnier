@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Pigeonnier</title>
+</head>
+<body>
+<div class="flex justify-around">
+    <button class="text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
+        Volé un pigeon
+    </button>
+    <button class="text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
+        Ajouté un pigeon
+    </button>
+</div>
+<div class="pt-3 px-6">
+<table class="w-full text-sm text-left text-gray-500 rounded-md shadow-md bg-white mt-3">
+    <thead class="text-xs text-gray-700 uppercase p-4">
+    <tr>
+        <th class="p-4">Nom</th>
+        <th>Proprio</th>
+        <th>Code</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <span th:if="${pigeons != null}">
+    <tr th:each="pigeon : ${pigeons}" class="pt-4 border border-slate-300 ">
+        <td th:text="${pigeon.nom}" class="pl-4 pt-4 pb-4"></td>
+        <td th:text="${pigeon.proprio}"></td>
+        <td th:text="${pigeon.code}"></td>
+    </tr>
+    </span>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

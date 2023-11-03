@@ -19,10 +19,16 @@ public class PigeonnierApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Pigeon Ricardo = new Pigeon( "Ricardo", "Rade", "4");
-        Pigeon Bombe = new Pigeon( "Bombe", "Kylian", "5");
-        Pigeon Hendrick = new Pigeon( "Hendrick", "Pigeon", "6");
+        Pigeon Paul = new Pigeon( "Paul", "BEN", "1");
+        Pigeon Tex = new Pigeon( "Tex", "BEN", "2");
+        Pigeon Tom = new Pigeon( "Tom", "BEN", "3");
+        Pigeon Ricardo = new Pigeon( "Ricardo", "BEN", "4");
+        Pigeon Bombe = new Pigeon( "Bombe", "BEN", "5");
+        Pigeon Hendrick = new Pigeon( "Hendrick", "BEN", "6");
 
+        PigeonManager.addPigeon(Paul);
+        PigeonManager.addPigeon(Tex);
+        PigeonManager.addPigeon(Tom);
         PigeonManager.addPigeon(Ricardo);
         PigeonManager.addPigeon(Bombe);
         PigeonManager.addPigeon(Hendrick);
