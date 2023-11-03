@@ -11,12 +11,14 @@
         <h1 class="font-semibold text-xl">Pigeonnier</h1>
     </div>
     <div class="flex justify-end mt-20">
-        <button class="text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
+        <button class=" btn-open text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
             Voler un pigeon
         </button>
         <button class=" flex gap-2 items-center text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
             <span>Pigeon</span>
         </button>
@@ -41,8 +43,98 @@
     </span>
             </tbody>
         </table>
-</div>
+    </div>
 
 </div>
+<div id="modalDiag" class="hidden">
+
+    <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div id="overlay" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <div id="overlay" class="hidden fixed inset-0 bg-red-200 transition-opacity"></div>
+                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start gap-4 items-center justify-between ">
+                            <div class="flex items-center">
+                                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 sm:mx-0 sm:h-10 sm:w-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                    </svg>
+
+                                </div>
+                                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Ajouter un avion</h3>
+                                </div>
+                            </div>
+
+                            <button id="cancel-btn" class="mt-3 justify-center rounded-md mt-[-5px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mt-2">
+                            <form class="space-y-6 " th:object="${pigeons}" th:action="@{/vole}" method="POST">
+                                <div class="mb-6">
+                                    <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Code</label>
+                                    <input type="text" id="code" name="code"
+
+                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                           placeholder="Ex: Airbus"
+                                           required>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="model" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pigeonnier</label>
+                                    <input type="text" id="model"
+                                           name="pigeonnier"
+
+                                           placeholder="10.14.200."
+                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                </div>
+
+                                <p class="mt-2 font-semibold text-red-600" id="error-modal"></p>
+                                <div>
+                                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Créer un avion</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <!--bouton du bas-->
+                    <!--<div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <div id="form-dialog">
+                            <button id="validBtn" class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Valider</button>
+                            <button id="cancel-btn" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Annuler</button>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let modalBtn = document.getElementById("modalDiag");
+    let overlay = document.getElementById("overlay");
+    const openModalBtn = document.querySelector(".btn-open");
+    const deleteBtn = document.querySelector(".delete");
+    const closeModalBtn = document.getElementById("cancel-btn");
+
+    const openModal = function () {
+        modalBtn.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+    };
+    openModalBtn.addEventListener("click", openModal);
+
+    const closeModal = function () {
+        modalBtn.classList.add("hidden");
+        overlay.classList.add("hidden");
+    };
+    closeModalBtn.addEventListener("click", closeModal);
+
+</script>
 </body>
 </html>

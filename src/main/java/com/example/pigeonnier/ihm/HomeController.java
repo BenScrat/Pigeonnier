@@ -2,6 +2,7 @@ package com.example.pigeonnier.ihm;
 
 import com.example.pigeonnier.bll.PigeonManager;
 import com.example.pigeonnier.bo.Pigeon;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,11 +27,13 @@ public class HomeController {
         return "home";
     }
 
-    public void addPigeon(String pigeonnier, String code){
+    @RequestMapping("/vole")
+    @Transactional
+    public void vole(String pigeonnier, String code){
         String url = "http://" + pigeonnier + "/pigeon/" + code;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getForEntity(url, Pigeon.class);
-        List<Pigeon> pigeons = pigeonManager.getAllPigeons();
-        pigeonManager.addPigeon(pigeons.get(pigeons.size()-1));
+
+        pigeonManager.addPigeon(new Pigeon());
     }
 }
