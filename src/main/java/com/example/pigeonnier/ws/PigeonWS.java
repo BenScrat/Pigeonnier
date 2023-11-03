@@ -2,21 +2,30 @@ package com.example.pigeonnier.ws;
 
 import com.example.pigeonnier.bll.PigeonManager;
 import com.example.pigeonnier.bo.Pigeon;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/ws/pigeon")
+@RequestMapping("/")
 public class PigeonWS {
 
     @Autowired
     PigeonManager pigeonManager;
 
-    @RequestMapping("/volePigeon/{code}/{pigeonnier}")
-    public String volePigeon(Pigeon pigeon) {
-        System.out.println("Vous avez volé le pigeon nommé "+ pigeon.getNom() + " qui est propriétaire de " + pigeon.getProprio());
-        pigeonManager.volePigeon(new Pigeon());
-        return "Pigeon volé a "+ pigeon.getProprio();
+
+
+    @GetMapping("/pigeon/attaque/{code}")
+    @Transactional
+    public Pigeon attaquePigeon(@PathVariable("code") String code){
+        //je souhaite vérifier si le code renseigné correspond à un pigeon de la base de données
+        if(pigeonManager.getPigeonByCode(code) == null){
+            return null;
+        }
+        Pigeon pigeon = pigeonManager.getPigeonByCode(code);
+        pigeonManager.deletePigeonByCode(code);
+        //je souhaite returné l'obejt pigeon du code renseigne
+        return pigeon;
     }
+
 }

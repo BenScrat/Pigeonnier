@@ -12,8 +12,6 @@ public class PigeonManagerImpl implements PigeonManager {
     @Autowired
     PigeonDAO pigeonDAO;
 
-
-
     @Override
     public void addPigeon(Pigeon pigeon) {
         pigeonDAO.save(pigeon);
@@ -25,7 +23,15 @@ public class PigeonManagerImpl implements PigeonManager {
     }
 
     @Override
-    public void volePigeon(Pigeon pigeon) {
-        pigeonDAO.save(pigeon);
+    public Pigeon getPigeonByCode(String code) {
+        return  pigeonDAO.findByCode(code);
     }
-}
+
+
+    @Override
+    public void deletePigeonByCode(String code) {
+        pigeonDAO.deleteByCode(code);
+    }
+
+    }
+

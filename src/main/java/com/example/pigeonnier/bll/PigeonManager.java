@@ -1,7 +1,6 @@
 package com.example.pigeonnier.bll;
 
 import com.example.pigeonnier.bo.Pigeon;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -11,6 +10,7 @@ public interface PigeonManager {
 
     public List<Pigeon> getAllPigeons();
 
-    @Transactional
-    void volePigeon(Pigeon pigeon);
+    Pigeon getPigeonByCode(String code);
+
+    void deletePigeonByCode(String code);
 }
