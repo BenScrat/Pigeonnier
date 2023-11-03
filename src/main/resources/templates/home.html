@@ -6,34 +6,43 @@
     <title>Pigeonnier</title>
 </head>
 <body>
-<div class="flex justify-around">
-    <button class="text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
-        Volé un pigeon
-    </button>
-    <button class="text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
-        Ajouté un pigeon
-    </button>
-</div>
-<div class="pt-3 px-6">
-<table class="w-full text-sm text-left text-gray-500 rounded-md shadow-md bg-white mt-3">
-    <thead class="text-xs text-gray-700 uppercase p-4">
-    <tr>
-        <th class="p-4">Nom</th>
-        <th>Proprio</th>
-        <th>Code</th>
-    </tr>
-    </thead>
+<div class="w-[1200px] mx-auto">
+    <div class="text-center mt-12">
+        <h1 class="font-semibold text-xl">Pigeonnier</h1>
+    </div>
+    <div class="flex justify-end mt-20">
+        <button class="text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
+            Voler un pigeon
+        </button>
+        <button class=" flex gap-2 items-center text-white m-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Pigeon</span>
+        </button>
+    </div>
+    <div class="pt-3 px-6">
+        <table class="w-full text-sm text-left text-gray-500 rounded-md shadow-md bg-white mt-3">
+            <thead class="text-xs text-gray-700 uppercase p-4">
+            <tr>
+                <th class="p-4">Nom</th>
+                <th>Proprio</th>
+                <th>Code</th>
+            </tr>
+            </thead>
 
-    <tbody>
-    <span th:if="${pigeons != null}">
+            <tbody>
+            <span th:if="${pigeons != null}">
     <tr th:each="pigeon : ${pigeons}" class="pt-4 border border-slate-300 ">
         <td th:text="${pigeon.nom}" class="pl-4 pt-4 pb-4"></td>
         <td th:text="${pigeon.proprio}"></td>
         <td th:text="${pigeon.code}"></td>
     </tr>
     </span>
-    </tbody>
-</table>
+            </tbody>
+        </table>
+</div>
+
 </div>
 </body>
 </html>
